@@ -1,0 +1,336 @@
+// used in styleguides
+.grid-filler {
+  background: #52bad5;
+  padding: 24px 0;
+  max-width: inherit;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+
+@mixin generate-grids($grid__columns-count, $i:1, $last:true) {
+  @for $i from 1 through $grid__columns-count {
+    .l-grid__item-#{$i} {
+      @include span($i of $grid__columns-count);
+      min-height: 1px;
+    }
+
+    @if ($last == true) {
+      .l-grid__item#{$i}-last {
+        @include span($i of $grid__columns-count last);
+      }
+    }
+  }
+}
+
+@mixin generate-grid-marginless($grid__columns-count, $i:1) {
+  @for $i from 1 through $grid__columns-count {
+    .l-grid__item-wide-#{$i} {
+      @include span($i of $grid__columns-count wide 0);
+      min-height: 1px;
+    }
+  }
+}
+
+@mixin generate-grid-wider($grid__columns-count, $i:1) {
+  @for $i from 1 through $grid__columns-count {
+    .l-grid__item-wider-#{$i} {
+      @include span($i of $grid__columns-count wider 0);
+      min-height: 1px;
+    }
+  }
+}
+
+@mixin generate-responsive-grid-xlg($grid__columns-count, $i:1, $last:true) {
+  @for $i from 1 through $grid__columns-count {
+
+    @include breakpoint($x-large) {
+      .l-xlg-#{$i} {
+        @include span($i of $grid__columns-count);
+
+      }
+    }
+
+  }
+}
+
+@mixin generate-responsive-grid-lg($grid__columns-count, $i:1, $last:true) {
+  @for $i from 1 through $grid__columns-count {
+
+    @include breakpoint($large) {
+      .l-lg-#{$i} {
+        @include span($i of $grid__columns-count);
+
+      }
+    }
+
+  }
+}
+
+@mixin generate-responsive-grid-md($grid__columns-count, $i:1, $last:true) {
+  @for $i from 1 through $grid__columns-count {
+
+    @include breakpoint($medium) {
+      .l-md-#{$i} {
+        @include span($i of $grid__columns-count);
+
+      }
+    }
+
+  }
+}
+
+@mixin generate-responsive-grid-xs($grid__columns-count, $i:1, $last:true) {
+  @for $i from 1 through $grid__columns-count {
+
+    @include breakpoint($xsmall) {
+      .l-xs-#{$i} {
+        @include span($i of $grid__columns-count);
+
+      }
+    }
+  }
+}
+
+@mixin generate-nested-grid($grid__columns-count, $i:1) {
+
+  @for $i from 1 through $grid__columns-count {
+    @if ($i == $i) {
+      $k: 1;
+      @while $k<=$i {
+        .l-grid__item-#{$k}of#{$i} {
+          @include span($k of $i)
+        }
+
+        $k: $k+1;
+
+      }
+
+    }
+
+  }
+}
+
+@mixin generate-nested-grid-md($grid__columns-count, $i:1) {
+
+  @for $i from 1 through $grid__columns-count {
+    @if ($i == $i) {
+      $k: 1;
+      @while $k<=$i {
+        .l-md-#{$k}of#{$i} {
+          @include span($k of $i)
+        }
+
+        $k: $k+1;
+
+      }
+
+    }
+
+  }
+}
+
+@mixin generate-nested-grid-xs($grid__columns-count, $i:1) {
+
+  @for $i from 1 through $grid__columns-count {
+    @if ($i == $i) {
+      $k: 1;
+      @while $k<=$i {
+        .l-xs-#{$k}of#{$i} {
+          @include span($k of $i)
+        }
+
+        $k: $k+1;
+
+      }
+
+    }
+
+  }
+}
+
+@mixin generate-push-pull($pull, $push, $grid__columns-count , $breakpoint) {
+  $i: 1;
+  @if ($pull) {
+    @for $i from 1 through $grid__columns-count {
+      .l-grid__pull-#{$i} {
+        @include pull($i);
+      }
+
+      @each $key, $value in $breakpoint {
+        @include breakpoint($key) {
+          .l-grid__pull-#{$value}-#{$i} {
+            @include pull($i);
+          }
+        }
+      }
+    }
+  }
+
+  @if ($push) {
+    @for $i from 1 through $grid__columns-count {
+      .l-grid__push-#{$i} {
+        @include push($i);
+      }
+
+      @each $key, $value in $breakpoint {
+        @include breakpoint($key) {
+          .l-grid__push-#{$value}-#{$i} {
+            @include push($i);
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin generate-responsive-visibility($name) {
+  @each $key, $value in $name {
+
+    @include breakpoint($key) {
+      .l-visible-#{$value} {
+        display: block;
+      }
+    }
+
+    @include breakpoint($key) {
+      .l-hidden-#{$value} {
+        display: none;
+      }
+    }
+  }
+}
+
+@include generate-nested-grid($grid__columns-count);
+
+@include generate-grid-marginless($grid__columns-count);
+
+@include generate-nested-grid-md($grid__columns-count);
+
+@include generate-nested-grid-xs($grid__columns-count);
+
+@include generate-grids($grid__columns-count);
+
+@include generate-responsive-grid-xlg($grid__columns-count);
+
+@include generate-responsive-grid-lg($grid__columns-count);
+
+@include generate-responsive-grid-md($grid__columns-count);
+
+@include generate-responsive-grid-xs($grid__columns-count);
+
+@include generate-responsive-visibility($breakpoints);
+
+.l-wrapper {
+  padding-left: 30px;
+  padding-right: 30px;
+  max-width: 1170px;
+  @include clearfix();
+  margin: 0 auto;
+
+  @include breakpoint($xsmall) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.l-row {
+  @include clearfix();
+}
+
+@include generate-push-pull(true, true, $grid__columns-count, $breakpoints);
+
+@function calculate-grid ($columns:12, $width:70 px, $gutter:30 px) {
+  $result: ($width * $columns) + ($gutter *($columns - 1));
+  @return $result;
+}
+
+.l-last {
+  @include last;
+
+  @include breakpoint($large) {
+    @at-root {
+      .l-lg-last {
+
+        @include last;
+
+      }
+    }
+  }
+
+  @include breakpoint($medium) {
+    @at-root {
+      .l-md-last {
+
+        @include last;
+
+      }
+    }
+  }
+
+  @include breakpoint($xsmall) {
+    @at-root {
+      .l-xs-last {
+
+        @include last;
+
+      }
+
+    }
+  }
+}
+
+.visible-xs,
+.visible-sm,
+.visible-md,
+.visible-lg {
+  display: none !important;
+}
+
+@include breakpoint($xsmall) {
+
+  .hidden-xs {
+    display: none !important;
+  }
+
+  .visible-xs {
+    display: block !important;
+  }
+}
+
+@include breakpoint($small-medium) {
+
+  .hidden-sm {
+    display: none !important;
+  }
+
+  .visible-sm {
+    display: block !important;
+  }
+}
+
+@include breakpoint($medium-large) {
+
+  .hidden-md {
+    display: none !important;
+  }
+
+  .visible-md {
+    display: block !important;
+  }
+}
+
+@include breakpoint($large-min) {
+
+  .hidden-lg {
+    display: none !important;
+  }
+
+  .visible-lg {
+    display: block !important;
+  }
+}
+
+

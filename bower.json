@@ -1,0 +1,21 @@
+{
+  "name": "susygenerator",
+  "version": "0.0.0",
+  "authors": [
+    "Miltiadis Bouchalakis <miltiadis@artirix.com>"
+  ],
+  "license":   "license MIT",
+  "dependencies": {
+    "compass-mixins": "~0.12.1",
+    "breakpoint-sass": "~2.6.1",
+    "normalize-scss": "~3.0.3",
+    "susy": "~2.2.6"
+  },
+  "description": "'test'",
+  "main": "dsfds",
+  "keywords": [
+    "sdfsdf"
+  ],
+  "homepage": "sdf",
+  "private": true
+}

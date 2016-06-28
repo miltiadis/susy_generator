@@ -1,0 +1,58 @@
+// ==========================================================================
+// Susy Configuration
+// ==========================================================================
+$grid__columns-count: 12;
+$grid__container: 1170px;
+$grid__column-width: 70px;
+$grid__column-gutter: 30px;
+
+$susy: (
+  flow: ltr, // ltr | rtl
+  output: float, // float | isolate
+  math: fluid, // fluid | static (requires column-width)
+  column-width: $grid__column-width, // false | value
+  container: $grid__container, // length or % | auto
+  container-position: auto, // left | center | right | <length> [*2] (grid padding)
+  last-flow: to,
+  columns: $grid__columns-count,
+  gutters: $grid__column-gutter/$grid__column-width,
+  gutter-position: after, // before | after | split | inside | inside-static (requires column-width)
+  global-box-sizing: border-box,
+  use-custom: (rem: true),
+  // content-box | border-box (affects inside/inside-static)
+);
+
+@include border-box-sizing;
+
+
+
+// ==========================================================================
+// Responsive
+// ==========================================================================
+$breakpoint__xsmall-width: 480px;
+$breakpoint__small-width: 481px;
+$breakpoint__medium-width: 768px;
+$breakpoint__large-width: 1024px;
+$breakpoint__xlarge-width: 1224px;
+
+$xsmall-min: min-width $breakpoint__xsmall-width;
+$xsmall: max-width $breakpoint__xsmall-width;
+$small: max-width $breakpoint__small-width;
+$small-min: min-width $breakpoint__small-width;
+$small-medium: $breakpoint__small-width $breakpoint__medium-width;
+$medium: max-width $breakpoint__medium-width;
+$medium-large: $breakpoint__medium-width $breakpoint__large-width;
+$medium-min: min-width $breakpoint__medium-width + 1;
+$large: max-width $breakpoint__large-width;
+$large-min: min-width $breakpoint__large-width;
+$x-large: max-width $breakpoint__xlarge-width;
+$x-large-min: min-width $breakpoint__xlarge-width;
+
+//used for responsive-visibility mixin in order to create all the classes within a single point
+$breakpoints: (
+  $small:'xs',
+  $medium: 'md',
+  $large : 'lg',
+  $x-large: 'xlg',
+  $x-large-min: 'xlg-min'
+);

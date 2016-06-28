@@ -1,0 +1,151 @@
+/* makes columns use full width */
+%columns-full {
+  @include span(full break);
+  //width: 1170px;
+
+}
+
+/* Clearfix is ussually applied to the container and ensures that the container will not collapse when all the childs are floated */
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+%clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+}
+
+//no Bullets
+%no-bullets {
+  @include no-bullets;
+}
+
+%no-background {
+  background: none;
+}
+
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+@function convert-to-rem($value, $base-value: $base-font-size) {
+  $value: strip-unit($value) / strip-unit($base-value) * 1rem;
+  @if ($value == 0+rem) { $value: 0; } // Turn 0rem into 0
+  @return $value;
+}
+
+@function rem-calc($values, $base-value: $base-font-size) {
+  $max: length($values);
+
+  @if $max == 1 {
+    @return convert-to-rem(nth($values, 1), $base-value);
+  }
+
+  $remValues: ();
+  @for $i from 1 through $max {
+    $remValues: append($remValues, convert-to-rem(nth($values, $i), $base-value));
+  }
+  @return $remValues;
+}
+
+@mixin line-height-fallback($size) {
+  line-height: $size;
+}
+
+@mixin line-height-to-rem($size: 12, $base: $base-font-size) {
+  @include line-height-fallback($size);
+  line-height: convert-to-rem($size);
+}
+
+
+
+/*
+mixin for rem typography
+if adjust-font-size-and-leading(none,24px); only converts the leading value, else both values converts
+font-size and line-height
+*/
+@mixin adjust-font-size-and-leading($to-size, $lines: auto, $from-size: $base-font-size) {
+
+  @if $to-size == no-font-size {
+
+    @include line-height-to-rem($lines)
+  } @else if $to-size and $lines {
+    @if $lines == auto {
+      $lines: lines-for-font-size($to-size);
+    }
+    font-size: $to-size;
+    font-size: rem-calc($to-size);
+    @include line-height-to-rem($lines)
+  }
+}
+
+@mixin svg-icon($icon, $size:null, $height:null) {
+  background: inline_image("icons/#{$icon}.svg") no-repeat;
+  width: $size;
+  height: $height;
+}
+
+/*
+Assuming the parent element has position: relative;, these four properties will center a child element both horizontally and vertically inside, no matter what the width of height of either are.
+
+*/
+
+@mixin centerer($horizontal: true, $vertical: true) {
+  position: absolute;
+  @if ($horizontal and $vertical) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if ($horizontal) {
+    left: 50%;
+    transform: translate(-50%, 0);
+  } @else if ($vertical) {
+    top: 50%;
+    transform: translate(0, -50);
+  }
+}
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+//Creates ::after or ::before selectors
+@mixin pseudo-element($el, $el-width, $el-height) {
+  @if $el == "before" or $el == "after" {
+    &:#{$el} {
+      content: '';
+      width: $el-width;
+      height: $el-height;
+      @content;
+    }
+  } @else {
+    @warn "`#{$el}` is not a valid pseudo-element.";
+  }
+}
+
+/// Map deep get
+/// @author Hugo Giraudel
+/// @access public
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Key chain
+/// @return {*} - Desired value
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}

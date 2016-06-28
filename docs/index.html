@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grids example</title>
+  <link rel="stylesheet" type="text/css" href="../dist/assets/stylesheets/main.css">
+</head>
+<body>
+<div class="l-wrapper">
+
+  <h2>Grid</h2>
+
+  <h3>Simple Grid</h3>
+
+  <div class="l-row">
+    <div class="l-grid__item-12"><p class="grid-filler">1 / 1</p></div>
+  </div>
+  <div class="l-row">
+    <div class="l-grid__item-6"><p class="grid-filler">1 / 2</p></div>
+    <div class="l-last l-grid__item-6"><p class="grid-filler">1 / 2</p></div>
+  </div>
+  <div class="l-row">
+    <div class="l-grid__item-4"><p class="grid-filler">1 / 3</p></div>
+    <div class="l-grid__item-4"><p class="grid-filler">1 / 3</p></div>
+    <div class="l-last l-grid__item-4"><p class="grid-filler">1 / 3</p></div>
+  </div>
+  <div class="l-row">
+    <div class="l-grid__item-3"><p class="grid-filler">1 / 4</p></div>
+    <div class="l-grid__item-3"><p class="grid-filler">1 / 4</p></div>
+    <div class="l-grid__item-3"><p class="grid-filler">1 / 4</p></div>
+    <div class="l-last l-grid__item-3"><p class="grid-filler">1 / 4</p></div>
+  </div>
+  <div class="l-row">
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+    <div class="l-last l-grid__item-1"><p class="grid-filler">1 / 12</p></div>
+  </div>
+  <h3>mixed grid</h3>
+
+  <div class="l-row">
+    <div class="l-grid__item-10of12"><p class="grid-filler">10 / 12</p></div>
+    <div class="l-last l-grid__item-2of12"><p class="grid-filler">2 / 12</p></div>
+  </div>
+  <div class="l-row">
+    <div class="l-grid__item-4">
+      <div class="l-grid__item-1of4"><p class="grid-filler">1 / 4</p></div>
+      <div class="l-last l-grid__item-3of4"><p class="grid-filler">3 / 4</p></div>
+    </div>
+    <div class="l-last l-grid__item-8">
+      <div class="l-grid__item-3of8"><p class="grid-filler">3 / 8</p></div>
+      <div class="l-last l-grid__item-5of8"><p class="grid-filler">5 / 8</p></div>
+    </div>
+  </div>
+  <h2>Complicated Nesting - the AG test</h2>
+
+  <div class="l-grid__item-2"><p class="grid-filler">2 / 12</p></div>
+  <div class="l-grid__item-8">
+    <div class="l-grid__item-4of8"><p class="grid-filler">4 / 8</p></div>
+    <div class="l-grid__item-4of8 l-last"><p class="grid-filler">4 / 8</p></div>
+    <div class="l-grid__item-6of8"><p class="grid-filler">4 / 8</p>
+
+      <p class="grid-filler">4 / 8</p></div>
+    <div class="l-grid__item-2of8 l-last">
+      <div class="l-grid__item-1of2"><p class="grid-filler">1 / 8</p></div>
+      <div class="l-grid__item-1of2 l-last"><p class="grid-filler">1 / 8</p></div>
+      <div class="l-grid__item-2of2"><p class="grid-filler">1 / 8</p></div>
+    </div>
+  </div>
+  <div class="l-grid__item-2 l-last"><p class="grid-filler">2 / 12</p></div>
+</div>
+</body>
+</html>
